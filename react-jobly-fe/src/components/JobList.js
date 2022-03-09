@@ -13,22 +13,26 @@ import JoblyApi from '../api';
  */
 function JobList(){
   const[jobs, setJobs] = useState(null);
+  const[isFetching, setIsFetching] = useState(true);
 
   useEffect(function getJobs(){
     async function fetchJobs() {
       const jobs = await JoblyApi.getJobs();
       setJobs(() => jobs);
+      setIsFetching(false);
     }
     fetchJobs();
-  })
-  const dummy = {
-    title: 'swe',
-    salary: 1,
-    equity: 0.5
+  },[])
+
+  if(isFetching){
+    return <p className='loading'>Loading...</p>
   }
+  
   return (
     <div className="JobList">
-      <Job job={dummy}/>
+      {jobs.map((j) => {
+        return <Job key={j.id} job={j}/>
+      })}
     </div>
   )
 }

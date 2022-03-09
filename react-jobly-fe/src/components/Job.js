@@ -10,9 +10,9 @@
 function Job({ job }){
   return (
     <div className="Job">
-      <h1 className="Job-title">{job.title}</h1>
-      <p className="Job-salary">{job.salary}</p>
-      {job.equity && <p className="Job-equity">{job.equity}</p>}
+      <h1 className="Job-title">Title: {job.title}</h1>
+      <p className="Job-salary">Salary: {job.salary}</p>
+      {job.equity && <p className="Job-equity">equity: {job.equity}</p>}
     </div>
   )
 }
