@@ -1,5 +1,14 @@
 import Company from './Company';
 
+/**
+ * handles logic of getting companies and creating a list of them
+ *
+ * props: none
+ * state:
+ * effe
+ *
+ * Routes -> CompanyList -> [Company ...]
+ */
 function CompanyList(){
 
   const dummy = {

@@ -111,3 +111,5 @@ class JoblyApi {
 
   // obviously, you'll add a lot here ...
 }
+
+export default JoblyApi;

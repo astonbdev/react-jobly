@@ -4,6 +4,16 @@ import CompanyList from './CompanyList';
 import JobList from './JobList';
 import CompanyDetails from './CompanyDetails';
 
+/**
+ * Router component
+ *
+ * props: none
+ * state:none
+ *
+ * App -> Routes -> Homepage, CompanyList, CompanyDetails, JobList
+ */
+
+//Add redirect
 function Routes (){
   return (
     <Switch>

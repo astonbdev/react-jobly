@@ -1,5 +1,12 @@
 
-
+/**
+ * renders info about specific job
+ *
+ * props: company obj like {title, salary, equity}
+ * state: none
+ *
+ * JobList -> Job
+ */
 function Job({ job }){
   return (
     <div className="Job">

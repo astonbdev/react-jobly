@@ -1,5 +1,11 @@
 import { NavLink } from 'react-router-dom';
-
+/**
+ * Renders navbar components
+ *
+ * props: none
+ * state: none
+ *
+ */
 function Nav() {
   return (
     <div className="Nav">
