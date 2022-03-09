@@ -63,17 +63,19 @@ class JoblyApi {
    * returns response from api
    */
   static async getCompaniesByFilters(filters){
-    let endpoint = `companies?`
-
-    console.log(filters);
-
-    for(let filter in filters){
-      endpoint = endpoint + (`${filter}=${filters[filter]}&&`);
+    let endpoint = 'companies?';
+    if(filters.name.length > 1){
+      endpoint += `name=${filters.name}`
     }
 
+    console.log(filters);
     console.log("endpoint:", endpoint)
+    
     const res = await this.request(endpoint);
     return res.companies;
+    // for(let filter in filters){
+    //   endpoint = endpoint + (`${filter}=${filters[filter]}&&`);
+    // }
   }
 
   /** makes api request for specific job
