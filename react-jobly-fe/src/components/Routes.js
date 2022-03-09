@@ -1,7 +1,8 @@
 import { Route, Switch} from 'react-router-dom';
 import Homepage from './Homepage';
-import Companies from './Companies';
-import Jobs from './Jobs';
+import CompanyList from './CompanyList';
+import JobList from './JobList';
+import CompanyDetails from './CompanyDetails';
 
 function Routes (){
   return (
@@ -10,10 +11,13 @@ function Routes (){
         <Homepage />
       </Route>
       <Route exact path="/companies">
-        <Companies />
+        <CompanyList />
+      </Route>
+      <Route exact path="/companies/:handle">
+        <CompanyDetails />
       </Route>
       <Route exact path="/jobs">
-        <Jobs />
+        <JobList />
       </Route>
     </Switch>
   )

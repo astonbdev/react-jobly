@@ -4,7 +4,7 @@ function Nav() {
   return (
     <div className="Nav">
       <NavLink exact to="/">Jobly</NavLink>
-      <NavLink exact to="/companies">Companyies</NavLink>
+      <NavLink exact to="/companies">Companies</NavLink>
       <NavLink exact to="/jobs">Jobs</NavLink>
     </div>
   )
