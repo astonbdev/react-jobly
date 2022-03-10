@@ -58,19 +58,19 @@ class JoblyApi {
    * makes api request for all companies with filters
    *
    * where filters is like:
-   * { fitler: query ...}
+   * { name: query ...}
    *
    * returns response from api
    */
-  static async getCompaniesByFilters(filters){
+  static async getCompaniesByName(filters){
     let endpoint = 'companies?';
-    if(filters.name.length > 1){
-      endpoint += `name=${filters.name}`
+    if(filters.query.length){
+      endpoint += `name=${filters.query}`
     }
 
     console.log(filters);
     console.log("endpoint:", endpoint)
-    
+
     const res = await this.request(endpoint);
     return res.companies;
     // for(let filter in filters){
@@ -101,16 +101,19 @@ class JoblyApi {
    * makes api request for all jobs with filters
    *
    * where filters is like:
-   * { fitler: query ...}
+   * { title: query}
    *
    * returns response from api
    */
-  static async getJobsByFilter(filters){
+  static async getJobsByTitle(filters){
     let endpoint = `jobs?`
 
-    for(let filter in filters){
-      endpoint.concat(`${filter}=${filters[filter]}&&`);
+    console.log("API Filters", filters);
+
+    if(filters.query.length){
+      endpoint += `title=${filters.query}`
     }
+
     const res = await this.request(endpoint);
     return res.jobs;
   }

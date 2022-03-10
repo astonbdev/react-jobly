@@ -2,7 +2,7 @@ import { useState } from "react"
 
 function SearchForm({ handleSearch }) {
   const initialState = {
-    name: ""
+    query: ""
   }
   const [formData, setFormData] = useState(initialState);
 
@@ -26,7 +26,7 @@ function SearchForm({ handleSearch }) {
         <input className="SearchForm-input"
           placeholder="Enter Search Term"
           onChange={handleChange}
-          name="name" />
+          name="query" />
         <button>Submit</button>
       </form>
     </div>

@@ -33,7 +33,7 @@ function CompanyList() {
     }
 
     async function fetchCompanies(){
-      const companies = await JoblyApi.getCompaniesByFilters(filterData);
+      const companies = await JoblyApi.getCompaniesByName(filterData);
       console.log("API CALL RSP: ", companies);
 
       setCompanies(()=> companies);
@@ -62,8 +62,8 @@ function CompanyList() {
       <SearchForm handleSearch={handleSearch}/>
       {companies.map(c => {
         return(
-          <Link to={`/companies/${c.handle}`}>
-            <Company key={c.handle} company={c} />
+          <Link key={c.handle} to={`/companies/${c.handle}`}>
+            <Company  company={c} />
           </Link>
         )
       })}

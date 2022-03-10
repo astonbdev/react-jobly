@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
 import Job from './Job';
 import JoblyApi from '../api';
+import Jobs from './Jobs';
+import SearchForm from './SearchForm';
 
 /**
  * handles logic of getting jobs and creating a list of them
@@ -11,15 +13,12 @@ import JoblyApi from '../api';
  *
  * Routes -> JobList -> [Job ...]
  */
-function JobList({ initialJobs=null }){
-  const[jobs, setJobs] = useState(initialJobs);
+function JobList(){
+  const[jobs, setJobs] = useState(null);
+  const [filterData, setFilterData] = useState(null);
   const[isFetching, setIsFetching] = useState(true);
 
   useEffect(function getJobs(){
-    if(initialJobs) {
-      setIsFetching(false);
-      return null;
-    }
     async function fetchJobs() {
       const jobs = await JoblyApi.getJobs();
       setJobs(() => jobs);
@@ -28,15 +27,36 @@ function JobList({ initialJobs=null }){
     fetchJobs();
   },[])
 
+  useEffect(function getJobsByFilter(){
+    if(!filterData){
+      return null;
+    }
+
+    async function fetchJobs(){
+      console.log("FilterData" ,filterData);
+      const jobs = await JoblyApi.getJobsByTitle(filterData);
+      console.log("API CALL RSP: ", jobs);
+
+      setJobs(()=> jobs);
+      setIsFetching(false);
+    }
+
+    fetchJobs();
+  }, [filterData])
+
+  function handleSearch(query){
+    setFilterData(query);
+    setIsFetching(true);
+  }
+
   if(isFetching){
     return <p className='loading'>Loading...</p>
   }
 
   return (
     <div className="JobList">
-      {jobs.map((j) => {
-        return <Job key={j.id} job={j}/>
-      })}
+      <SearchForm handleSearch={handleSearch}/>
+      <Jobs jobs={jobs}/>
     </div>
   )
 }

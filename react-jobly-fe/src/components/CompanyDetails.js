@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Company from './Company';
-import JobList from './JobList';
+import Jobs from './Jobs'
 import JoblyApi from '../api';
 
 /**
@@ -38,7 +38,7 @@ function CompanyDetails() {
   return (
     <div className='CompanyDetails'>
       <Company company={company} />
-      <JobList initialJobs={company.jobs} />
+      <Jobs jobs={company.jobs} />
     </div>
   )
 
