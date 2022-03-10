@@ -1,0 +1,44 @@
+
+App
+new-state: user
+
+
+Signup
+props: updateUser()
+state: registerInfo, isFetching
+special: update userContext
+backend-endpoints: user.register, user.getOne
+
+Login
+props: updateUser()
+state: loginCredentials, isFetching
+special: update userContext
+backend-endpoints: user.authenticate, user.getOne
+
+User Form
+props: fields => {username, firstName, lastName, email, pw} or {username, pw}, handleSubmit
+state: formData
+
+handleSubmit(){
+  axios request
+  updateUser(user)
+}
+
+
+
+Profile
+props: user => { username, firstName, lastName, isAdmin, applications }
+state: profileChanges, isFetching
+special: update userContext
+backend-endpoints: user.patch
+
+Profile Form
+props: user => { username, firstName, lastName, isAdmin, applications }, handleSubmit
+state: formData
+
+
+signUp => User Form
+
+Login => User Form
+
+Profile => Profile Form

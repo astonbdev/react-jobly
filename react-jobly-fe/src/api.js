@@ -108,6 +108,23 @@ class JoblyApi {
     const res = await this.request(endpoint);
     return res.jobs;
   }
+
+  static async getUser(username){
+    const res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  static async registerUser(user){
+    const method = 'post';
+    const res = await this.request(`auth/register`, user, method);
+    return res.token;
+  }
+
+  static async loginUser(user){
+    const method = 'post';
+    const res = await this.request(`auth/token`, user, method);
+    return res.token;
+  }
 }
 
 export default JoblyApi;

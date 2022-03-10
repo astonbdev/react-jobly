@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import UserContext from './userContext';
+import {useContext} from 'react'
 /** Nav renders navbar components
  *
  * props: none
@@ -7,6 +9,9 @@ import { NavLink } from 'react-router-dom';
  * App => Nav
  */
 function Nav() {
+  const { user } = useContext(UserContext);
+  //TODO display navlinks based on user logged in or not
+
   return (
     <div className="Nav">
       <NavLink exact to="/">Jobly</NavLink>

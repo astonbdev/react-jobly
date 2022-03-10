@@ -29,12 +29,13 @@ function Signup({ updateUser }) {
   useEffect(function registerUser(){
     async function register(){
       const token = await JoblyApi.registerUser(signupData);
+      JoblyApi.token = token;
       const user = await JoblyApi.getUser(signupData.username);
       updateUser(user, token);
       setIsRegistering(false);
     }
     register();
-  })
+  }, [isRegistering]);
 
   if(isRegistering) {
     return <p className='loading'>Loading...</p>
