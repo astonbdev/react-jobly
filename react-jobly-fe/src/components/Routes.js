@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Homepage from './Homepage';
 import CompanyList from './CompanyList';
 import JobList from './JobList';
@@ -11,8 +11,6 @@ import CompanyDetails from './CompanyDetails';
  *
  * App -> Routes -> Homepage, CompanyList, CompanyDetails, JobList
  */
-
-//Add redirect
 function Routes() {
   return (
     <Switch>
@@ -28,6 +26,7 @@ function Routes() {
       <Route exact path="/jobs">
         <JobList />
       </Route>
+      <Redirect to="/"/>
     </Switch>
   )
 }

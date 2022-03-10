@@ -31,9 +31,11 @@ function SearchForm({ handleSearch }) {
     <div className="SearchForm">
       <form className="SearchForm-form" onSubmit={handleSubmit}>
         <input className="SearchForm-input"
+          type="search"
           placeholder="Enter Search Term"
           onChange={handleChange}
-          name="query" />
+          name="query"
+          value={formData.query} />
         <button className="SearchForm-button">Submit</button>
       </form>
     </div>

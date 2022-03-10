@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Company from './Company';
 import Jobs from './Jobs'
@@ -23,12 +23,13 @@ function CompanyDetails() {
 
   useEffect(function getCompany() {
     async function fetchCompany() {
-      const company = await JoblyApi.getCompany(handleName);
-      setCompany(() => company);
-      setIsFetching(false);
+        const company = await JoblyApi.getCompany(handleName);
+        console.log('company', company);
+        setCompany(() => company);
+        setIsFetching(false);
     }
     fetchCompany();
-  }, [])
+  }, [handleName])
 
   if (isFetching) {
     return <p>Loading...</p>

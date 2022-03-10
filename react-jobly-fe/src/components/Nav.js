@@ -10,8 +10,8 @@ function Nav() {
   return (
     <div className="Nav">
       <NavLink exact to="/">Jobly</NavLink>
-      <NavLink exact to="/companies">Companies</NavLink>
-      <NavLink exact to="/jobs">Jobs</NavLink>
+      <NavLink to="/companies">Companies</NavLink>
+      <NavLink to="/jobs">Jobs</NavLink>
     </div>
   )
 }
