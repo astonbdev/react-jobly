@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import JoblyApi from '../api';
 
-function Signup({ updateUser }) {
+function SignupForm({ updateToken }) {
   const initialState = {
     username: "",
     password: "",
@@ -29,9 +29,7 @@ function Signup({ updateUser }) {
   useEffect(function registerUser(){
     async function register(){
       const token = await JoblyApi.registerUser(signupData);
-      JoblyApi.token = token;
-      const user = await JoblyApi.getUser(signupData.username);
-      updateUser(user, token);
+      updateToken(token);
       setIsRegistering(false);
     }
     register();
@@ -42,12 +40,12 @@ function Signup({ updateUser }) {
   }
 
   return (
-    <form className='Signup-form' onSubmit={handleSubmit}>
+    <form className='SignupForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
       <input id='username' name='username' onChange={handleChange} />
 
       <label htmlFor='password'>Password</label>
-      <input id='password' name='username' onChange={handleChange} />
+      <input id='password' name='password' onChange={handleChange} />
 
       <label htmlFor='firstName'>First Name</label>
       <input id='firstName' name='firstName' onChange={handleChange} />
@@ -63,4 +61,4 @@ function Signup({ updateUser }) {
   )
 }
 
-export default Signup;
+export default SignupForm;
