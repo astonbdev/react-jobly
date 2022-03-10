@@ -1,18 +1,17 @@
 
-/**
- * renders info about specific job
+/** Job renders info about specific job
  *
- * props: company obj like {title, salary, equity}
+ * props: company obj like => {id, title, salary, equity}
  * state: none
  *
- * JobList -> Job
+ * Jobs-> Job
  */
-function Job({ job }){
+function Job({ job }) {
   return (
     <div className="Job">
       <h1 className="Job-title">Title: {job.title}</h1>
       <p className="Job-salary">Salary: {job.salary}</p>
-      {job.equity && <p className="Job-equity">equity: {job.equity}</p>}
+      {job.equity && <p className="Job-equity">Equity: {job.equity}</p>}
     </div>
   )
 }

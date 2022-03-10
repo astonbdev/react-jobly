@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-/**
- * Renders navbar components
+/** Nav renders navbar components
  *
  * props: none
  * state: none
  *
+ * App => Nav
  */
 function Nav() {
   return (

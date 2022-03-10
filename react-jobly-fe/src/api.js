@@ -58,7 +58,7 @@ class JoblyApi {
    * makes api request for all companies with filters
    *
    * where filters is like:
-   * { name: query ...}
+   * { query: value }
    *
    * returns response from api
    */
@@ -68,17 +68,11 @@ class JoblyApi {
       endpoint += `name=${filters.query}`
     }
 
-    console.log(filters);
-    console.log("endpoint:", endpoint)
-
     const res = await this.request(endpoint);
     return res.companies;
-    // for(let filter in filters){
-    //   endpoint = endpoint + (`${filter}=${filters[filter]}&&`);
-    // }
   }
 
-  /** makes api request for specific job
+  /** makes api request for a specific job
    * where id is job id
    *
    * returns response from api
@@ -101,15 +95,12 @@ class JoblyApi {
    * makes api request for all jobs with filters
    *
    * where filters is like:
-   * { title: query}
+   * { query: value }
    *
    * returns response from api
    */
   static async getJobsByTitle(filters){
     let endpoint = `jobs?`
-
-    console.log("API Filters", filters);
-
     if(filters.query.length){
       endpoint += `title=${filters.query}`
     }
@@ -117,8 +108,6 @@ class JoblyApi {
     const res = await this.request(endpoint);
     return res.jobs;
   }
-
-  // obviously, you'll add a lot here ...
 }
 
 export default JoblyApi;

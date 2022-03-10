@@ -4,16 +4,16 @@ import Company from './Company';
 import Jobs from './Jobs'
 import JoblyApi from '../api';
 
-/**
- * Renders company information and list of jobs
+/** CompanyDetails renders company information and list of jobs
  *
  * props: none
- * state:
- * effects:
+ * state: company => {handle, name, description, logoUrl, numEmployees}, 
+ *        isFetching => bool
+ * effect: getCompany() get data from the API
  *
- * special: useParams
+ * special: useParams get the company handle from route
  *
- * Routes -> CompanyDetails -> Company, JobList
+ * Routes -> CompanyDetails -> Company, Jobs
  */
 function CompanyDetails() {
   const [company, setCompany] = useState(null);
@@ -22,16 +22,15 @@ function CompanyDetails() {
   const handleName = params.handle;
 
   useEffect(function getCompany() {
-
     async function fetchCompany() {
       const company = await JoblyApi.getCompany(handleName);
       setCompany(() => company);
       setIsFetching(false);
     }
     fetchCompany();
-  },[])
+  }, [])
 
-  if(isFetching){
+  if (isFetching) {
     return <p>Loading...</p>
   }
 
@@ -41,7 +40,6 @@ function CompanyDetails() {
       <Jobs jobs={company.jobs} />
     </div>
   )
-
 }
 
 export default CompanyDetails;

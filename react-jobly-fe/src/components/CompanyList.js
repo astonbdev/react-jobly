@@ -4,14 +4,15 @@ import JoblyApi from '../api';
 import { Link } from 'react-router-dom'
 import SearchForm from './SearchForm';
 
-/**
- * handles logic of getting companies and creating a list of them
+/** Company List handles logic of getting companies and creating a list of them
  *
  * props: none
- * state:
- * effe
+ * state: companies => [{handle, name, description, logoUrl numEmployees}], 
+ *        isFetching => bool, 
+ *         filterData => {query}
+ * effect: getCompanies() fetch data from API
  *
- * Routes -> CompanyList -> [Company ...]
+ * Routes -> CompanyList -> (SearchForm,[Company ...])
  */
 function CompanyList() {
   const [companies, setCompanies] = useState(null);
@@ -27,16 +28,15 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
-  useEffect(function getCompanyByFilter(){
-    if(!filterData){
+  useEffect(function getCompanyByFilter() {
+    if (!filterData) {
       return null;
     }
 
-    async function fetchCompanies(){
+    async function fetchCompanies() {
       const companies = await JoblyApi.getCompaniesByName(filterData);
-      console.log("API CALL RSP: ", companies);
 
-      setCompanies(()=> companies);
+      setCompanies(() => companies);
       setIsFetching(false);
     }
 
@@ -47,23 +47,18 @@ function CompanyList() {
     return <p className='loading'>Loading...</p>
   }
 
-  function handleSearch(query){
+  function handleSearch(query) {
     setFilterData(query);
     setIsFetching(true);
   }
-  // const dummy = {
-  //   name: 'apple',
-  //   description: '3T Company',
-  //   logoUrl: '/logos/logo1.png',
-  //   numEmployees: 100
-  // }
+
   return (
     <div className="CompanyList">
-      <SearchForm handleSearch={handleSearch}/>
+      <SearchForm handleSearch={handleSearch} />
       {companies.map(c => {
-        return(
+        return (
           <Link key={c.handle} to={`/companies/${c.handle}`}>
-            <Company  company={c} />
+            <Company company={c} />
           </Link>
         )
       })}

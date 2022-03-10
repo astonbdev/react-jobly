@@ -1,11 +1,10 @@
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Homepage from './Homepage';
 import CompanyList from './CompanyList';
 import JobList from './JobList';
 import CompanyDetails from './CompanyDetails';
 
-/**
- * Router component
+/** Routes render component
  *
  * props: none
  * state:none
@@ -14,7 +13,7 @@ import CompanyDetails from './CompanyDetails';
  */
 
 //Add redirect
-function Routes (){
+function Routes() {
   return (
     <Switch>
       <Route exact path="/">

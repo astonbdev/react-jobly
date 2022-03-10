@@ -1,8 +1,14 @@
-
+/**Homepage
+ * 
+ * props: none
+ * state: none
+ * 
+ * Routes => Homepage
+ */
 function Homepage(){
   return (
     <div className="Homepage">
-      <h1>Jobly</h1>
+      <h1 className="Homepage-title">Jobly</h1>
     </div>
   )
 }

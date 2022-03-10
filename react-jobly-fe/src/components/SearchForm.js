@@ -1,5 +1,12 @@
 import { useState } from "react"
 
+/**SearchForm 
+ * 
+ * props: handleSearch() sets the form data
+ * state: formData => {query}
+ * 
+ * JobList, CompanyList => SearchForm
+ */
 function SearchForm({ handleSearch }) {
   const initialState = {
     query: ""
@@ -27,11 +34,10 @@ function SearchForm({ handleSearch }) {
           placeholder="Enter Search Term"
           onChange={handleChange}
           name="query" />
-        <button>Submit</button>
+        <button className="SearchForm-button">Submit</button>
       </form>
     </div>
   )
-
 }
 
 export default SearchForm;
