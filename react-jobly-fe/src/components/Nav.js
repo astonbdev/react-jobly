@@ -9,7 +9,7 @@ import {useContext} from 'react'
  * App => Nav
  */
 function Nav() {
-  const { user } = useContext(UserContext);
+  const currentUser = useContext(UserContext);
   //TODO display navlinks based on user logged in or not
 
   return (

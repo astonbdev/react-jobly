@@ -19,15 +19,17 @@ function LoginForm({ updateToken }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    setLoginData(initialState);
     setIsFetching(true);
   }
 
   useEffect(function loginUser(){
+    if(!isFetching) return;
+
     async function login(){
       const token = await JoblyApi.loginUser(loginData);
       updateToken(token);
       setIsFetching(false);
+      setLoginData(initialState);
     }
     login();
   }, [isFetching]);

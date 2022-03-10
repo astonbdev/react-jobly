@@ -1,20 +1,19 @@
 import {useState, useEffect} from 'react';
 import JoblyApi from '../api';
 
-function SignupForm({ updateToken }) {
+function ProfileForm({updateToken, user}) {
   const initialState = {
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
   }
-  const [signupData, setSignupData] = useState(null);
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [profileData, setProfileData] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setSignupData(fData => ({
+    setProfileData(fData => ({
       ...fData,
       [name]: value,
     }));
@@ -22,32 +21,29 @@ function SignupForm({ updateToken }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    setIsRegistering(true);
+    setIsUpdating(true);
   }
 
   useEffect(function registerUser(){
-    if(!isRegistering) return;
+    if(!isUpdating) return;
+
     async function register(){
-      console.log("sending: ", signupData);
-      const token = await JoblyApi.registerUser(signupData);
+      const token = await JoblyApi.registerUser(profileData);
       updateToken(token);
-      setIsRegistering(false);
-      setSignupData(initialState);
+      setIsUpdating(false);
+      setProfileData(initialState);
     }
     register();
-  }, [isRegistering]);
+  }, [isUpdating]);
 
-  if(isRegistering) {
+  if(isUpdating) {
     return <p className='loading'>Loading...</p>
   }
-  console.log("signupData", signupData);
+
   return (
     <form className='SignupForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
-      <input id='username' name='username' onChange={handleChange} />
-
-      <label htmlFor='password'>Password</label>
-      <input id='password' name='password' onChange={handleChange} />
+      <input disabled id='username' name='username' />
 
       <label htmlFor='firstName'>First Name</label>
       <input id='firstName' name='firstName' onChange={handleChange} />
@@ -63,4 +59,4 @@ function SignupForm({ updateToken }) {
   )
 }
 
-export default SignupForm;
+export default ProfileForm;

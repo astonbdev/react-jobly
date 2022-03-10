@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import UserContext from "./userContext";
 import JoblyApi from '../api';
-import jwt from 'jsonwebtoken';
+import jwt_decode from "jwt-decode";
 
 /**
  * Main App Component
@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
  */
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
 
   function updateToken(token){
@@ -28,19 +28,20 @@ function App() {
     if(token === null) return;
 
     async function fetchUser(){
-      const username = jwt.decode(token).payload.username;
+      const username = await jwt_decode(token).username;
+      console.log(username);
       const user = await JoblyApi.getUser(username);
-      setUser(() => user);
+      setCurrentUser(() => user);
     }
     fetchUser();
   }, [token])
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={currentUser}>
       <div className="App">
         <Router>
           <Nav />
-          <Routes updateToken={updateToken}/>
+          <Routes updateToken={updateToken} user={currentUser}/>
         </Router>
       </div>
     </UserContext.Provider>

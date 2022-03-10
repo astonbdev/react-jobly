@@ -3,6 +3,9 @@ import Homepage from './Homepage';
 import CompanyList from './CompanyList';
 import JobList from './JobList';
 import CompanyDetails from './CompanyDetails';
+import SignupForm from './SignupForm';
+import LoginForm from './LoginForm';
+import ProfileForm from './ProfileForm';
 
 /** Routes render component
  *
@@ -11,7 +14,7 @@ import CompanyDetails from './CompanyDetails';
  *
  * App -> Routes -> Homepage, CompanyList, CompanyDetails, JobList
  */
-function Routes() {
+function Routes({updateToken, user}) {
   return (
     <Switch>
       <Route exact path="/">
@@ -26,8 +29,17 @@ function Routes() {
       <Route exact path="/jobs">
         <JobList />
       </Route>
+      <Route exact path="/signup">
+        <SignupForm updateToken={updateToken}/>
+      </Route>
+      <Route exact path="/login">
+        <LoginForm updateToken={updateToken}/>
+      </Route>
+      <Route exact path="/profile/:username">
+        <ProfileForm updateToken={updateToken} user={user}/>
+      </Route>
       <Redirect to="/"/>
     </Switch>
-  )
+  );
 }
 export default Routes;
