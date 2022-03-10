@@ -1,6 +1,7 @@
 import Nav from './Nav';
 import Routes from './Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
+import UserContext from "./userContext";
 
 /**
  * Main App Component
@@ -11,12 +12,15 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Nav />
-        <Routes />
-      </Router>
-    </div>
+    <UserContext.Provider value={null}>
+      <div className="App">
+        <Router>
+          <Nav />
+          <Routes />
+        </Router>
+      </div>
+    </UserContext.Provider>
+
   );
 }
 
