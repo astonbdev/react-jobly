@@ -3,12 +3,12 @@ import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
 /** SearchForm
- * 
+ *
  * Props: updateToken => fn
  * States: signupData => {username, password, fName, lName, email},
  *         isRedirect => bool,
  *         errors => ['error message',...]
- * 
+ *
  * Routes => SignupForm
  */
 function SignupForm({ updateToken }) {
@@ -51,27 +51,27 @@ function SignupForm({ updateToken }) {
       <label htmlFor='username'>Username</label>
       <input id='username'
         name='username'
-        value={formData.email}
+        value={formData.username}
         onChange={handleChange} required />
 
       <label htmlFor='password'>Password</label>
       <input id='password'
         name='password'
-        value={formData.email}
+        value={formData.password}
         onChange={handleChange}
         required />
 
       <label htmlFor='firstName'>First Name</label>
       <input id='firstName'
         name='firstName'
-        value={formData.email}
+        value={formData.firstName}
         onChange={handleChange}
         required />
 
       <label htmlFor='lastName'>Last Name</label>
       <input id='lastName'
         name='lastName'
-        value={formData.email}
+        value={formData.lastName}
         onChange={handleChange}
         required />
 

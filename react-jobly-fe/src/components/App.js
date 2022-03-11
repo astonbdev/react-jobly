@@ -11,15 +11,18 @@ import jwt_decode from "jwt-decode";
  * Props: None
  * States: currentUser => {username, fName, lName, email, [applications...]},
  *         token => string
- * 
+ *         msgs => [string...]
+ *
  * App -> (Nav, Routes)
  */
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [msgs, setMsgs] = useState(null);
 
   console.log('APP', currentUser, token);
-  
+  console.log("Jobly API token is saved: ", JoblyApi.token === token);
+
   function updateToken(token) {
     setToken(() => {
       JoblyApi.token = token;
@@ -30,6 +33,18 @@ function App() {
   function logout() {
     setCurrentUser(null);
     setToken(null);
+  }
+
+  async function updateUser(updateData) {
+    try {
+      const res = await JoblyApi.updateUser(updateData, currentUser.username);
+      setCurrentUser(res);
+      setMsgs(() => ["Profile Updated!"]);
+    }
+    catch (err) {
+      setMsgs(() => err);
+    }
+
   }
 
   useEffect(function getUser() {
@@ -48,7 +63,10 @@ function App() {
       <div className="App container">
         <Router>
           <Nav logout={logout} />
-          <Routes updateToken={updateToken} user={currentUser} />
+          <Routes updateToken={updateToken}
+            updateUser={updateUser}
+            user={currentUser}
+            msgs={msgs} />
         </Router>
       </div>
     </UserContext.Provider>

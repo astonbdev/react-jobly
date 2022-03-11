@@ -2,16 +2,16 @@ import { useState } from 'react';
 import JoblyApi from '../api';
 
 /**ProfileForm
- * 
- * Props: updateToken => fn,
+ *
+ * Props: updateUser => fn,
  *        user => {username, fName, lName, email, [applications...]}
- * States: profileData => {username, fName, lName, email}
- * 
+ *        msgs => [str...]
+ * States: formData => {username, fName, lName, email}
+ *
  * Routes => ProfileForm
  */
-function ProfileForm({ updateToken, user }) {
+function ProfileForm({ updateUser, user, msgs }) {
   const initialState = {
-    username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
@@ -31,9 +31,7 @@ function ProfileForm({ updateToken, user }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    const token = await JoblyApi.updateUser(formData);
-    updateToken(token);
-    setFormData(initialState);
+    updateUser(formData);
   }
 
   return (
@@ -41,7 +39,7 @@ function ProfileForm({ updateToken, user }) {
       <label htmlFor='username'>Username</label>
       <input disabled id='username'
         name='username'
-        value={formData.username} />
+        value={user.username} />
 
       <label htmlFor='firstName'>First Name</label>
       <input id='firstName'
@@ -60,9 +58,12 @@ function ProfileForm({ updateToken, user }) {
         id='email'
         name='email'
         value={formData.email}
-        onChange={handleChange} />
-
-      <button className="ProfileForm-button">SignUp</button>
+        onChange={handleChange}
+        required />
+      <button className="ProfileForm-button">Update Profile</button>
+      <div classname="ProfileForm-msgs">
+        {msgs && msgs.map((msg,i) => <p className='ProfileForm-msg' key={i}>{msg}</p>)}
+      </div>
     </form>
   )
 }

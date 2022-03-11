@@ -9,17 +9,20 @@ import ProfileForm from './ProfileForm';
 
 /** Routes render component
  *
- * props: updateToken => fn, 
+ * props: updateToken => fn,
+ *        updateUser => fn,
  *        user => {username, fName, lName, email, [applications...]}
- * 
+ *        msgs => [str...]
+ *
+ *
  * state: none
  *
- * App -> Routes -> (Homepage, CompanyList, 
- *                   CompanyDetails, JobList, 
- *                   SignupForm, LoginForm, 
+ * App -> Routes -> (Homepage, CompanyList,
+ *                   CompanyDetails, JobList,
+ *                   SignupForm, LoginForm,
  *                   ProfileForm)
  */
-function Routes({ updateToken, user }) {
+function Routes({ updateToken, updateUser, user, msgs }) {
   //UI concerns here, not security of the routes
   //ternary on valid user to show available routes
   return (
@@ -43,7 +46,7 @@ function Routes({ updateToken, user }) {
         <LoginForm updateToken={updateToken} />
       </Route>
       <Route exact path="/profile/:username">
-        <ProfileForm updateToken={updateToken} user={user} />
+        <ProfileForm updateUser={updateUser} user={user} msgs={msgs} />
       </Route>
       <Redirect to="/" />
     </Switch>

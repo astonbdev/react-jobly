@@ -126,9 +126,9 @@ class JoblyApi {
     return res.token;
   }
 
-  static async updateUser(user){
+  static async updateUser(user, username){
     const method = 'patch';
-    const res = await this.request(`users/${user.username}`, user, method);
+    const res = await this.request(`users/${username}`, user, method);
     return res.user;
   }
 }
