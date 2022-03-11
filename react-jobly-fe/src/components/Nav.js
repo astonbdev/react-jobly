@@ -1,16 +1,16 @@
 import { NavLink, Link } from 'react-router-dom';
 import UserContext from './userContext';
 import {useContext} from 'react'
+
 /** Nav renders navbar components
  *
- * props: none
+ * props: logout => fn
  * state: none
  *
  * App => Nav
  */
 function Nav({ logout }) {
   const currentUser = useContext(UserContext);
-  //TODO display navlinks based on user logged in or not
 
   return (
     <div className="Nav">
@@ -26,8 +26,7 @@ function Nav({ logout }) {
       <div className="Nav-loggedIn">
         <NavLink to={`/profile/${currentUser.username}`}>Profile</NavLink>
         <Link to="/" onClick={() => logout()}>Logout {currentUser.username}</Link>
-      </div>
-        }
+      </div>}
     </div>
   )
 }

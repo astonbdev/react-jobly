@@ -2,6 +2,16 @@ import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
+/** SearchForm
+ * 
+ * Props: updateToken => fn
+ * States: signupData => {username, password, fName, lName, email},
+ *         isRegistering => bool,
+ *         isRedirect => bool,
+ *         errors => ['error message',...]
+ * 
+ * Routes => SignupForm
+ */
 function SignupForm({ updateToken }) {
   const initialState = {
     username: "",

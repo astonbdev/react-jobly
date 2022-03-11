@@ -14,7 +14,7 @@ function Company({ company }) {
       {company.logoUrl &&
         <img src={company.logoUrl} alt="logo" className="Company-logoUrl" />}
       {company.numEmployees &&
-        <p className="Company-numEmployees">Number Employees: {company.numEmployees}</p>}
+        <p className="Company-employees">Number Employees: {company.numEmployees}</p>}
     </div>
   );
 }

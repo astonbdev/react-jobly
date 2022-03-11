@@ -9,13 +9,18 @@ import ProfileForm from './ProfileForm';
 
 /** Routes render component
  *
- * props: none
- * state:none
+ * props: updateToken => fn, 
+ *        user => {username, fName, lName, email, [applications...]}
+ * 
+ * state: none
  *
- * App -> Routes -> Homepage, CompanyList, CompanyDetails, JobList
+ * App -> Routes -> (Homepage, CompanyList, 
+ *                   CompanyDetails, JobList, 
+ *                   SignupForm, LoginForm, 
+ *                   ProfileForm)
  */
-function Routes({updateToken, user}) {
-  console.log("Routes User:", user);
+function Routes({ updateToken, user }) {
+
   return (
     <Switch>
       <Route exact path="/">
@@ -31,15 +36,15 @@ function Routes({updateToken, user}) {
         <JobList />
       </Route>
       <Route exact path="/signup">
-        <SignupForm updateToken={updateToken}/>
+        <SignupForm updateToken={updateToken} />
       </Route>
       <Route exact path="/login">
-        <LoginForm updateToken={updateToken}/>
+        <LoginForm updateToken={updateToken} />
       </Route>
       <Route exact path="/profile/:username">
-        <ProfileForm updateToken={updateToken} user={user}/>
+        <ProfileForm updateToken={updateToken} user={user} />
       </Route>
-      <Redirect to="/"/>
+      <Redirect to="/" />
     </Switch>
   );
 }

@@ -1,7 +1,15 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import JoblyApi from '../api';
 
-function ProfileForm({updateToken, user}) {
+/**ProfileForm
+ * 
+ * Props: updateToken => fn,
+ *        user => {username, fName, lName, email, [applications...]}
+ * States: profileData => {username, fName, lName, email}
+ * 
+ * Routes => ProfileForm
+ */
+function ProfileForm({ updateToken, user }) {
   console.log("ProfileForm User:", user);
 
   const initialState = {
@@ -26,10 +34,10 @@ function ProfileForm({updateToken, user}) {
     setIsUpdating(true);
   }
 
-  useEffect(function registerUser(){
-    if(!isUpdating) return;
+  useEffect(function registerUser() {
+    if (!isUpdating) return;
 
-    async function register(){
+    async function register() {
       const token = await JoblyApi.registerUser(profileData);
       updateToken(token);
       setIsUpdating(false);
@@ -38,35 +46,35 @@ function ProfileForm({updateToken, user}) {
     register();
   }, [isUpdating]);
 
-  if(isUpdating) {
+  if (isUpdating) {
     return <p className='loading'>Loading...</p>
   }
 
   return (
-    <form className='SignupForm' onSubmit={handleSubmit}>
+    <form className='ProfileForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
       <input disabled id='username' name='username' />
 
       <label htmlFor='firstName'>First Name</label>
       <input id='firstName'
-             name='firstName'
-             value={profileData.firstName}
-             onChange={handleChange}/>
+        name='firstName'
+        value={profileData.firstName}
+        onChange={handleChange} />
 
       <label htmlFor='lastName'>Last Name</label>
       <input id='lastName'
-             name='lastName'
-             value={profileData.lastName}
-             onChange={handleChange} />
+        name='lastName'
+        value={profileData.lastName}
+        onChange={handleChange} />
 
       <label htmlFor='email'>Email</label>
       <input type="email"
-             id='email'
-             name='email'
-             value={profileData.email}
-             onChange={handleChange} />
+        id='email'
+        name='email'
+        value={profileData.email}
+        onChange={handleChange} />
 
-      <button className="Signup-button">SignUp</button>
+      <button className="ProfileForm-button">SignUp</button>
     </form>
   )
 }

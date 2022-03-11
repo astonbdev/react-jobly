@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-/**SearchForm 
+/** SearchForm 
  * 
  * props: handleSearch() sets the form data
  * state: formData => {query}
@@ -28,8 +28,7 @@ function SearchForm({ handleSearch }) {
   }
 
   return (
-    <div className="SearchForm">
-      <form className="SearchForm-form" onSubmit={handleSubmit}>
+      <form className="SearchForm" onSubmit={handleSubmit}>
         <input className="SearchForm-input"
           type="search"
           placeholder="Enter Search Term"
@@ -38,7 +37,6 @@ function SearchForm({ handleSearch }) {
           value={formData.query} />
         <button className="SearchForm-button">Submit</button>
       </form>
-    </div>
   )
 }
 

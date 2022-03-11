@@ -11,9 +11,8 @@ import { useContext } from 'react';
 function Homepage() {
   const currentUser = useContext(UserContext);
 
-
-  if(currentUser){
-    return(
+  if (currentUser) {
+    return (
       <div className="Homepage">
         <h1 className="Homepage-title">Welcome to Jobly, {currentUser.firstName}</h1>
       </div>
