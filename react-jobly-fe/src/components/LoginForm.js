@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
@@ -6,7 +6,6 @@ import JoblyApi from '../api';
  * 
  * Props: updateToken => fn
  * States: loginData => {username, password},
- *         isFetching => bool,
  *         isRedirect => bool,
  *         errors => ['error message',...]
  * 
@@ -16,60 +15,54 @@ function LoginForm({ updateToken }) {
   const initialState = {
     username: "",
     password: "",
-  }
-  const [loginData, setLoginData] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
+  };
+
+  const [formData, setFormData] = useState(null);
   const [isRedirect, setIsRedirect] = useState(false);
   const [errors, setErrors] = useState(false);
 
+  console.log('LOGIN FORM', formData, isRedirect, errors);
+
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setLoginData(fData => ({
+    setFormData(fData => ({
       ...fData,
       [name]: value,
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    setIsFetching(true);
-  }
-
-  useEffect(function loginUser(){
-    if(!isFetching) return;
-
-    async function login(){
-      try{
-      const token = await JoblyApi.loginUser(loginData);
+    try {
+      const token = await JoblyApi.loginUser(formData);
       updateToken(token);
-      setIsFetching(false);
-      setLoginData(initialState);
+      setFormData(initialState);
       setIsRedirect(true);
-      }catch(err){
-        setErrors(() => err);
-        setLoginData(initialState);
-        setIsFetching(false);
-      }
+    } catch (err) {
+      setErrors(() => err);
+      setFormData(initialState);
     }
-    login();
-  }, [isFetching]);
+  }
 
   if (isRedirect) return <Redirect to="/" />;
-
-  if(isFetching) {
-    return <p className='loading'>Loading...</p>
-  }
 
   return (
     <form className='LoginForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
-      <input id='username' name='username' onChange={handleChange} />
+      <input id='username'
+        name='username'
+        value={formData.email}
+        onChange={handleChange} required />
 
       <label htmlFor='password'>Password</label>
-      <input id='password' name='password' onChange={handleChange} />
+      <input id='password'
+        type="password"
+        name='password'
+        value={formData.email}
+        onChange={handleChange} required />
 
       <button className="LoginForm-button">Login</button>
-      <br/>
+      <br />
       {errors && errors.map((e, i) => {
         return <p className="LoginForm-errors" key={i}>{e}</p>
       })}

@@ -18,6 +18,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
 
+  console.log('APP', currentUser, token);
+  
   function updateToken(token) {
     setToken(() => {
       JoblyApi.token = token;
@@ -43,7 +45,7 @@ function App() {
 
   return (
     <UserContext.Provider value={currentUser}>
-      <div className="App">
+      <div className="App container">
         <Router>
           <Nav logout={logout} />
           <Routes updateToken={updateToken} user={currentUser} />

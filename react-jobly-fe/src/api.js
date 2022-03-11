@@ -125,6 +125,12 @@ class JoblyApi {
     const res = await this.request(`auth/token`, user, method);
     return res.token;
   }
+
+  static async updateUser(user){
+    const method = 'patch';
+    const res = await this.request(`users/${user.username}`, user, method);
+    return res.user;
+  }
 }
 
 export default JoblyApi;

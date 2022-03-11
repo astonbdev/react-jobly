@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
@@ -6,7 +6,6 @@ import JoblyApi from '../api';
  * 
  * Props: updateToken => fn
  * States: signupData => {username, password, fName, lName, email},
- *         isRegistering => bool,
  *         isRedirect => bool,
  *         errors => ['error message',...]
  * 
@@ -20,62 +19,69 @@ function SignupForm({ updateToken }) {
     lastName: "",
     email: "",
   };
-  const [signupData, setSignupData] = useState(initialState);
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const [isRedirect, setIsRedirect] = useState(false);
   const [errors, setErrors] = useState(null);
 
+  console.log('SIGNUP FORM', formData, isRedirect, errors);
+
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setSignupData(fData => ({
+    setFormData(fData => ({
       ...fData,
       [name]: value,
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    setIsRegistering(true);
-  }
-
-  useEffect(function registerUser() {
-    if (!isRegistering) return;
-    async function register() {
-      try {
-        const token = await JoblyApi.registerUser(signupData);
-        updateToken(token);
-        setIsRegistering(false);
-        setIsRedirect(true);
-      } catch (err) {
-        setErrors(() => err);
-        setIsRegistering(false);
-      }
+    try {
+      const token = await JoblyApi.registerUser(formData);
+      updateToken(token);
+      setIsRedirect(true);
+    } catch (err) {
+      setErrors(() => err);
     }
-    register();
-  }, [isRegistering]);
+  }
 
   if (isRedirect) return <Redirect to="/" />
-
-  if (isRegistering) {
-    return <p className='loading'>Loading...</p>
-  }
 
   return (
     <form className='SignupForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
-      <input id='username' name='username' onChange={handleChange} />
+      <input id='username'
+        name='username'
+        value={formData.email}
+        onChange={handleChange} required />
 
       <label htmlFor='password'>Password</label>
-      <input id='password' name='password' onChange={handleChange} />
+      <input id='password'
+        name='password'
+        value={formData.email}
+        onChange={handleChange}
+        required />
 
       <label htmlFor='firstName'>First Name</label>
-      <input id='firstName' name='firstName' onChange={handleChange} />
+      <input id='firstName'
+        name='firstName'
+        value={formData.email}
+        onChange={handleChange}
+        required />
 
       <label htmlFor='lastName'>Last Name</label>
-      <input id='lastName' name='lastName' onChange={handleChange} />
+      <input id='lastName'
+        name='lastName'
+        value={formData.email}
+        onChange={handleChange}
+        required />
 
       <label htmlFor='email'>Email</label>
-      <input type="email" id='email' name='email' onChange={handleChange} />
+      <input id='email'
+        type="email"
+        name='email'
+        value={formData.email}
+        onChange={handleChange}
+        required />
 
       <button className="SignupForm-button">SignUp</button>
       <br />

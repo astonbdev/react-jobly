@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import JoblyApi from '../api';
 
 /**ProfileForm
@@ -10,68 +10,56 @@ import JoblyApi from '../api';
  * Routes => ProfileForm
  */
 function ProfileForm({ updateToken, user }) {
-  console.log("ProfileForm User:", user);
-
   const initialState = {
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
-  }
-  const [profileData, setProfileData] = useState(initialState);
-  const [isUpdating, setIsUpdating] = useState(false);
+  };
+
+  const [formData, setFormData] = useState(initialState);
+
+  console.log('PROFILE FORM', formData);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setProfileData(fData => ({
+    setFormData(fData => ({
       ...fData,
       [name]: value,
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    setIsUpdating(true);
-  }
-
-  useEffect(function registerUser() {
-    if (!isUpdating) return;
-
-    async function register() {
-      const token = await JoblyApi.registerUser(profileData);
-      updateToken(token);
-      setIsUpdating(false);
-      setProfileData(initialState);
-    }
-    register();
-  }, [isUpdating]);
-
-  if (isUpdating) {
-    return <p className='loading'>Loading...</p>
+    const token = await JoblyApi.updateUser(formData);
+    updateToken(token);
+    setFormData(initialState);
   }
 
   return (
     <form className='ProfileForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
-      <input disabled id='username' name='username' />
+      <input disabled id='username'
+        name='username'
+        value={formData.username} />
 
       <label htmlFor='firstName'>First Name</label>
       <input id='firstName'
         name='firstName'
-        value={profileData.firstName}
+        value={formData.firstName}
         onChange={handleChange} />
 
       <label htmlFor='lastName'>Last Name</label>
       <input id='lastName'
         name='lastName'
-        value={profileData.lastName}
+        value={formData.lastName}
         onChange={handleChange} />
 
       <label htmlFor='email'>Email</label>
       <input type="email"
         id='email'
         name='email'
-        value={profileData.email}
+        value={formData.email}
         onChange={handleChange} />
 
       <button className="ProfileForm-button">SignUp</button>

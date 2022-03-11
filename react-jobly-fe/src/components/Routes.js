@@ -20,7 +20,8 @@ import ProfileForm from './ProfileForm';
  *                   ProfileForm)
  */
 function Routes({ updateToken, user }) {
-
+  //UI concerns here, not security of the routes
+  //ternary on valid user to show available routes
   return (
     <Switch>
       <Route exact path="/">
