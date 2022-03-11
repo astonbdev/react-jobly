@@ -60,7 +60,7 @@ function ProfileForm({ updateUser, user, msgs }) {
         onChange={handleChange}
         required />
       <button className="ProfileForm-button">Update Profile</button>
-      <div classname="ProfileForm-msgs">
+      <div className="ProfileForm-msgs">
         {msgs && msgs.map((msg,i) => <p className='ProfileForm-msg' key={i}>{msg}</p>)}
       </div>
     </form>

@@ -19,6 +19,7 @@ function SignupForm({ updateToken }) {
     lastName: "",
     email: "",
   };
+  
   const [formData, setFormData] = useState(initialState);
   const [isRedirect, setIsRedirect] = useState(false);
   const [errors, setErrors] = useState(null);
@@ -52,10 +53,12 @@ function SignupForm({ updateToken }) {
       <input id='username'
         name='username'
         value={formData.username}
-        onChange={handleChange} required />
+        onChange={handleChange} 
+        required />
 
       <label htmlFor='password'>Password</label>
       <input id='password'
+        type="password"
         name='password'
         value={formData.password}
         onChange={handleChange}

@@ -26,29 +26,38 @@ function Routes({ updateToken, updateUser, user, msgs }) {
   //UI concerns here, not security of the routes
   return (
     <Switch>
-      <Route exact path="/">
-        <Homepage />
-      </Route>
-      {/* ternary on valid user to show available routes */}
-      <Route exact path="/companies">
-        <CompanyList />
-      </Route>
-      <Route exact path="/companies/:handle">
-        <CompanyDetails />
-      </Route>
-      <Route exact path="/jobs">
-        <JobList />
-      </Route>
-      <Route exact path="/signup">
-        <SignupForm updateToken={updateToken} />
-      </Route>
-      <Route exact path="/login">
-        <LoginForm updateToken={updateToken} />
-      </Route>
-      <Route exact path="/profile/:username">
-        <ProfileForm updateUser={updateUser} user={user} msgs={msgs} />
-      </Route>
-      <Redirect to="/" />
+      <>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
+        {user &&
+          <>
+            <Route exact path="/companies">
+              <CompanyList />
+            </Route>
+            <Route exact path="/companies/:handle">
+              <CompanyDetails />
+            </Route>
+            <Route exact path="/jobs">
+              <JobList />
+            </Route>
+            <Route exact path="/profile/:username">
+              <ProfileForm updateUser={updateUser} user={user} msgs={msgs} />
+            </Route>
+          </>
+        }
+        {!user &&
+          <>
+            <Route exact path="/signup">
+              <SignupForm updateToken={updateToken} />
+            </Route>
+            <Route exact path="/login">
+              <LoginForm updateToken={updateToken} />
+            </Route>
+          </>
+        }
+        <Redirect to="/" />
+      </>
     </Switch>
   );
 }
