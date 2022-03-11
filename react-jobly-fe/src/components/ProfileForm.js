@@ -2,13 +2,15 @@ import {useState, useEffect} from 'react';
 import JoblyApi from '../api';
 
 function ProfileForm({updateToken, user}) {
+  console.log("ProfileForm User:", user);
+
   const initialState = {
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
   }
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState(initialState);
   const [isUpdating, setIsUpdating] = useState(false);
 
   function handleChange(evt) {
@@ -46,13 +48,23 @@ function ProfileForm({updateToken, user}) {
       <input disabled id='username' name='username' />
 
       <label htmlFor='firstName'>First Name</label>
-      <input id='firstName' name='firstName' onChange={handleChange} />
+      <input id='firstName'
+             name='firstName'
+             value={profileData.firstName}
+             onChange={handleChange}/>
 
       <label htmlFor='lastName'>Last Name</label>
-      <input id='lastName' name='lastName' onChange={handleChange} />
+      <input id='lastName'
+             name='lastName'
+             value={profileData.lastName}
+             onChange={handleChange} />
 
       <label htmlFor='email'>Email</label>
-      <input type="email" id='email' name='email' onChange={handleChange} />
+      <input type="email"
+             id='email'
+             name='email'
+             value={profileData.email}
+             onChange={handleChange} />
 
       <button className="Signup-button">SignUp</button>
     </form>

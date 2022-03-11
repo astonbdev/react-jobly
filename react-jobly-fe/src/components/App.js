@@ -1,7 +1,7 @@
 import Nav from './Nav';
 import Routes from './Routes';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import UserContext from "./userContext";
 import JoblyApi from '../api';
 import jwt_decode from "jwt-decode";
@@ -24,6 +24,11 @@ function App() {
     });
   }
 
+  function logout(){
+    setCurrentUser(null);
+    setToken(null);
+  }
+
   useEffect(function getUser(){
     if(token === null) return;
 
@@ -39,7 +44,7 @@ function App() {
     <UserContext.Provider value={currentUser}>
       <div className="App">
         <Router>
-          <Nav />
+          <Nav logout={logout}/>
           <Routes updateToken={updateToken} user={currentUser}/>
         </Router>
       </div>

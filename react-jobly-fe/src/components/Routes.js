@@ -15,6 +15,7 @@ import ProfileForm from './ProfileForm';
  * App -> Routes -> Homepage, CompanyList, CompanyDetails, JobList
  */
 function Routes({updateToken, user}) {
+  console.log("Routes User:", user);
   return (
     <Switch>
       <Route exact path="/">
