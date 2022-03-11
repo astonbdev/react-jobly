@@ -18,7 +18,6 @@ import jwt_decode from "jwt-decode";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [msgs, setMsgs] = useState(null);
 
   console.log('APP', currentUser, token);
   console.log("Jobly API token is saved: ", JoblyApi.token === token);
@@ -45,16 +44,15 @@ function App() {
     localStorage.removeItem("token");
   }
 
+  /** updates user on backend
+   * updateData => {firstName, lastName, email}
+   *
+   * returns success status msg in array
+   */
   async function updateUser(updateData) {
-    try {
       const res = await JoblyApi.updateUser(updateData, currentUser.username);
       setCurrentUser(res);
-      setMsgs(() => ["Profile Updated!"]);
-    }
-    catch (err) {
-      setMsgs(() => err);
-    }
-
+      return ["Profile Updated!"];
   }
 
   useEffect(function getUser() {
@@ -75,8 +73,7 @@ function App() {
           <Nav logout={logout} />
           <Routes updateToken={updateToken}
             updateUser={updateUser}
-            user={currentUser}
-            msgs={msgs} />
+            user={currentUser}/>
         </Router>
       </div>
     </UserContext.Provider>

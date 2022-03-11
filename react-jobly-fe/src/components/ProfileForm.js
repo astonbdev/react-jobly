@@ -5,11 +5,14 @@ import { useState } from 'react';
  * Props: updateUser => fn,
  *        user => {username, fName, lName, email, [applications...]}
  *        msgs => [str...]
+ *
  * States: formData => {username, fName, lName, email}
  *
  * Routes => ProfileForm
  */
-function ProfileForm({ updateUser, user, msgs }) {
+//more explicit name for msgs -> statusMsgs
+//could catch errors and display inside of here and not captured in app IE try catch around updateUser
+function ProfileForm({ updateUser, user}) {
   const initialState = {
     firstName: user.firstName,
     lastName: user.lastName,
@@ -17,6 +20,7 @@ function ProfileForm({ updateUser, user, msgs }) {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [statusMsgs, setStatusMsgs] = useState(null);
 
   console.log('PROFILE FORM', formData);
 
@@ -28,9 +32,16 @@ function ProfileForm({ updateUser, user, msgs }) {
     }));
   }
 
+  /** calls updateUser passed from app, updates statusMsgs */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    updateUser(formData);
+    try{
+      const successMsg = await updateUser(formData);
+      setStatusMsgs(() => successMsg)
+    }
+    catch(err){
+      setStatusMsgs(() => err);
+    }
   }
 
   return (
@@ -61,7 +72,7 @@ function ProfileForm({ updateUser, user, msgs }) {
         required />
       <button className="ProfileForm-button">Update Profile</button>
       <div className="ProfileForm-msgs">
-        {msgs && msgs.map((msg,i) => <p className='ProfileForm-msg' key={i}>{msg}</p>)}
+        {statusMsgs && statusMsgs.map((msg,i) => <p className='ProfileForm-msg' key={i}>{msg}</p>)}
       </div>
     </form>
   )

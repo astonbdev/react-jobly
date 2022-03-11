@@ -13,7 +13,8 @@ function Nav({ logout }) {
   const currentUser = useContext(UserContext);
 
   return (
-    <div className="Nav">
+    <div className="Nav navbar">
+      <NavLink exact to="/" className="nav-brand">Jobly</NavLink>
 
       {!currentUser &&
         <>
@@ -23,7 +24,6 @@ function Nav({ logout }) {
 
       {currentUser &&
         <>
-          <NavLink exact to="/">Jobly</NavLink>
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to={`/profile/${currentUser.username}`}>Profile</NavLink>

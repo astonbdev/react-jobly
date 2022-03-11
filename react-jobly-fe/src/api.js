@@ -24,8 +24,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -62,9 +62,9 @@ class JoblyApi {
    *
    * returns response from api
    */
-  static async getCompaniesByName(filters){
+  static async getCompaniesByName(filters) {
     let endpoint = 'companies?';
-    if(filters.query.length){
+    if (filters.query.length) {
       endpoint += `name=${filters.query}`
     }
 
@@ -77,7 +77,7 @@ class JoblyApi {
    *
    * returns response from api
    */
-  static async getJob(id){
+  static async getJob(id) {
     const res = await this.request(`jobs/${id}`);
     return res;
   }
@@ -86,7 +86,7 @@ class JoblyApi {
    *
    * returns response from api
    */
-  static async getJobs(){
+  static async getJobs() {
     const res = await this.request(`jobs`);
     return res.jobs;
   }
@@ -97,11 +97,11 @@ class JoblyApi {
    * where filters is like:
    * { query: value }
    *
-   * returns response from api
+   * returns jobs from response
    */
-  static async getJobsByTitle(filters){
+  static async getJobsByTitle(filters) {
     let endpoint = `jobs?`
-    if(filters.query.length){
+    if (filters.query.length) {
       endpoint += `title=${filters.query}`
     }
 
@@ -109,27 +109,57 @@ class JoblyApi {
     return res.jobs;
   }
 
-  static async getUser(username){
+  /**
+   * makes api request to get a user
+   *
+   * username => string
+   *
+   * returns user from response.
+   */
+  static async getUser(username) {
     const res = await this.request(`users/${username}`);
     return res.user;
   }
 
-  static async registerUser(user){
+
+  /**
+   * makes api request to update user
+   *
+   * user => { firstName, lastName, email}
+   * username => string
+   *
+   * returns user from response
+   */
+  static async updateUser(user, username) {
+    const method = 'patch';
+    const res = await this.request(`users/${username}`, user, method);
+    return res.user;
+  }
+
+  /**
+   * makes api request to register user
+   *
+   * user => {username, password, firstName, lastName, email}
+   *
+   * returns token from response
+   */
+  static async registerUser(user) {
     const method = 'post';
     const res = await this.request(`auth/register`, user, method);
     return res.token;
   }
 
-  static async loginUser(user){
+  /**
+   * makes api request to login user
+   *
+   * user => {username, password}
+   *
+   * returns token from response
+   */
+  static async loginUser(user) {
     const method = 'post';
     const res = await this.request(`auth/token`, user, method);
     return res.token;
-  }
-
-  static async updateUser(user, username){
-    const method = 'patch';
-    const res = await this.request(`users/${username}`, user, method);
-    return res.user;
   }
 }
 

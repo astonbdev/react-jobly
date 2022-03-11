@@ -22,7 +22,7 @@ import ProfileForm from './ProfileForm';
  *                   SignupForm, LoginForm,
  *                   ProfileForm)
  */
-function Routes({ updateToken, updateUser, user, msgs }) {
+function Routes({ updateToken, updateUser, user }) {
   //UI concerns here, not security of the routes
   return (
     <Switch>
@@ -42,7 +42,7 @@ function Routes({ updateToken, updateUser, user, msgs }) {
               <JobList />
             </Route>
             <Route exact path="/profile/:username">
-              <ProfileForm updateUser={updateUser} user={user} msgs={msgs} />
+              <ProfileForm updateUser={updateUser} user={user} />
             </Route>
           </>
         }

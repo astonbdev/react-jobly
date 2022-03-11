@@ -5,7 +5,7 @@ import JoblyApi from '../api';
 /**LoginForm
  *
  * Props: updateToken => fn
- * States: loginData => {username, password},
+ * States: formData => {username, password},
  *         isRedirect => bool,
  *         errors => ['error message',...]
  *

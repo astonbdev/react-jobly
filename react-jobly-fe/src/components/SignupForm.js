@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
-/** SearchForm
+/** SignupForm
  *
  * Props: updateToken => fn
- * States: signupData => {username, password, fName, lName, email},
+ * States: formData => {username, password, fName, lName, email},
  *         isRedirect => bool,
  *         errors => ['error message',...]
  *
@@ -19,7 +19,7 @@ function SignupForm({ updateToken }) {
     lastName: "",
     email: "",
   };
-  
+
   const [formData, setFormData] = useState(initialState);
   const [isRedirect, setIsRedirect] = useState(false);
   const [errors, setErrors] = useState(null);
@@ -53,7 +53,7 @@ function SignupForm({ updateToken }) {
       <input id='username'
         name='username'
         value={formData.username}
-        onChange={handleChange} 
+        onChange={handleChange}
         required />
 
       <label htmlFor='password'>Password</label>
