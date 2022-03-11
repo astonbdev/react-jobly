@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import UserContext from "./userContext";
 import JoblyApi from '../api';
 import jwt_decode from "jwt-decode";
+import './App.css';
 
 /** Main App Component
  *
@@ -68,7 +69,7 @@ function App() {
 
   return (
     <UserContext.Provider value={currentUser}>
-      <div className="App container">
+      <div className="App">
         <Router>
           <Nav logout={logout} />
           <Routes updateToken={updateToken}

@@ -13,7 +13,7 @@ function Nav({ logout }) {
   const currentUser = useContext(UserContext);
 
   return (
-    <div className="Nav navbar">
+    <div className="Nav navbar-light bg-light">
       <NavLink exact to="/" className="nav-brand">Jobly</NavLink>
 
       {!currentUser &&

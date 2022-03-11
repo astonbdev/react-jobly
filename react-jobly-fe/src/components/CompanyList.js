@@ -53,7 +53,7 @@ function CompanyList() {
   }
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList container">
       <SearchForm handleSearch={handleSearch} />
       {companies.map(c => {
         return (

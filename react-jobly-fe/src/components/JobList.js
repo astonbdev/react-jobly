@@ -51,7 +51,7 @@ function JobList() {
   }
 
   return (
-    <div className="JobList">
+    <div className="JobList container">
       <SearchForm handleSearch={handleSearch} />
       <Jobs jobs={jobs} />
     </div>
