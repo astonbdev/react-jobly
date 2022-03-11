@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
 function LoginForm({ updateToken }) {
@@ -8,6 +9,8 @@ function LoginForm({ updateToken }) {
   }
   const [loginData, setLoginData] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [isRedirect, setIsRedirect] = useState(false);
+  const [errors, setErrors] = useState(false);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -26,13 +29,22 @@ function LoginForm({ updateToken }) {
     if(!isFetching) return;
 
     async function login(){
+      try{
       const token = await JoblyApi.loginUser(loginData);
       updateToken(token);
       setIsFetching(false);
       setLoginData(initialState);
+      setIsRedirect(true);
+      }catch(err){
+        setErrors(() => err);
+        setLoginData(initialState);
+        setIsFetching(false);
+      }
     }
     login();
   }, [isFetching]);
+
+  if (isRedirect) return <Redirect to="/" />;
 
   if(isFetching) {
     return <p className='loading'>Loading...</p>
@@ -47,6 +59,10 @@ function LoginForm({ updateToken }) {
       <input id='password' name='password' onChange={handleChange} />
 
       <button className="LoginForm-button">Login</button>
+      <br/>
+      {errors && errors.map((e, i) => {
+        return <p className="LoginForm-errors" key={i}>{e}</p>
+      })}
     </form>
   )
 }

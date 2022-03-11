@@ -29,7 +29,6 @@ function App() {
 
     async function fetchUser(){
       const username = await jwt_decode(token).username;
-      console.log(username);
       const user = await JoblyApi.getUser(username);
       setCurrentUser(() => user);
     }

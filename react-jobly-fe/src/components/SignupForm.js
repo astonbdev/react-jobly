@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
 
 function SignupForm({ updateToken }) {
@@ -8,9 +9,11 @@ function SignupForm({ updateToken }) {
     firstName: "",
     lastName: "",
     email: "",
-  }
-  const [signupData, setSignupData] = useState(null);
+  };
+  const [signupData, setSignupData] = useState(initialState);
   const [isRegistering, setIsRegistering] = useState(false);
+  const [isRedirect, setIsRedirect] = useState(false);
+  const [errors, setErrors] = useState(null);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -25,22 +28,28 @@ function SignupForm({ updateToken }) {
     setIsRegistering(true);
   }
 
-  useEffect(function registerUser(){
-    if(!isRegistering) return;
-    async function register(){
-      console.log("sending: ", signupData);
-      const token = await JoblyApi.registerUser(signupData);
-      updateToken(token);
-      setIsRegistering(false);
-      setSignupData(initialState);
+  useEffect(function registerUser() {
+    if (!isRegistering) return;
+    async function register() {
+      try {
+        const token = await JoblyApi.registerUser(signupData);
+        updateToken(token);
+        setIsRegistering(false);
+        setIsRedirect(true);
+      } catch (err) {
+        setErrors(() => err);
+        setIsRegistering(false);
+      }
     }
     register();
   }, [isRegistering]);
 
-  if(isRegistering) {
+  if (isRedirect) return <Redirect to="/" />
+
+  if (isRegistering) {
     return <p className='loading'>Loading...</p>
   }
-  console.log("signupData", signupData);
+
   return (
     <form className='SignupForm' onSubmit={handleSubmit}>
       <label htmlFor='username'>Username</label>
@@ -58,7 +67,11 @@ function SignupForm({ updateToken }) {
       <label htmlFor='email'>Email</label>
       <input type="email" id='email' name='email' onChange={handleChange} />
 
-      <button className="Signup-button">SignUp</button>
+      <button className="SignupForm-button">SignUp</button>
+      <br />
+      {errors && errors.map((e, i) => {
+        return <p className="SignupForm-errors" key={i}>{e}</p>
+      })}
     </form>
   )
 }
