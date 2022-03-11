@@ -24,12 +24,12 @@ import ProfileForm from './ProfileForm';
  */
 function Routes({ updateToken, updateUser, user, msgs }) {
   //UI concerns here, not security of the routes
-  //ternary on valid user to show available routes
   return (
     <Switch>
       <Route exact path="/">
         <Homepage />
       </Route>
+      {/* ternary on valid user to show available routes */}
       <Route exact path="/companies">
         <CompanyList />
       </Route>

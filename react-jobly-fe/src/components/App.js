@@ -23,12 +23,21 @@ function App() {
   console.log('APP', currentUser, token);
   console.log("Jobly API token is saved: ", JoblyApi.token === token);
 
+  //check local storage token for the first time,
+  //if there is update the token
+  useEffect(function checkLocalToken(){
+    const localToken = localStorage.getItem("token");
+    if(localToken) updateToken(localToken);
+  },[])
+
   function updateToken(token) {
     setToken(() => {
       JoblyApi.token = token;
       return token;
     });
+    localStorage.setItem("token", token);
   }
+
 
   function logout() {
     setCurrentUser(null);
