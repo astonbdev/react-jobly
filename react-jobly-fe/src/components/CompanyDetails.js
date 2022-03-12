@@ -7,7 +7,7 @@ import JoblyApi from '../api';
 /** CompanyDetails renders company information and list of jobs
  *
  * props: none
- * state: company => {handle, name, description, logoUrl, numEmployees}, 
+ * state: company => {handle, name, description, logoUrl, numEmployees},
  *        isFetching => bool
  * effect: getCompany() get data from the API
  *
@@ -43,9 +43,9 @@ function CompanyDetails() {
   }
 
   return (
-    <div className='CompanyDetails'>
+    <div className='CompanyDetails container'>
       {errors && <p className='errors'>{`Error: ${errors.msg}`}</p> }
-      {company && 
+      {company &&
         <div className='CompanyDetails-content'>
           <Company company={company} />
           <Jobs jobs={company.jobs} />

@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import JoblyApi from '../api';
 import { Link } from 'react-router-dom'
 import SearchForm from './SearchForm';
+import './CompanyList.css'
 const INITIAL_NO_FILTER = null;
 
 /** Company List handles logic of getting companies and creating a list of them
  *
  * props: none
- * states: companies => [{handle, name, description, logoUrl numEmployees}], 
- *        isFetching => bool, 
+ * states: companies => [{handle, name, description, logoUrl numEmployees}],
+ *        isFetching => bool,
  *        filterData => {query}
  * effect: getCompanies() fetch data from API
  *
@@ -57,7 +58,7 @@ function CompanyList() {
       <SearchForm handleSearch={handleSearch} />
       {companies.map(c => {
         return (
-          <Link key={c.handle} to={`/companies/${c.handle}`}>
+          <Link className='CompanyList' key={c.handle} to={`/companies/${c.handle}`}>
             <Company company={c} />
           </Link>
         )
