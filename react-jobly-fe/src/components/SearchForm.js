@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { Form, Button, Input, InputGroup } from "reactstrap"
 
-/** SearchForm 
- * 
+/** SearchForm
+ *
  * props: handleSearch() sets the form data
  * state: formData => {query}
- * 
+ *
  * JobList, CompanyList => SearchForm
  */
 function SearchForm({ handleSearch }) {
@@ -28,15 +29,17 @@ function SearchForm({ handleSearch }) {
   }
 
   return (
-      <form className="SearchForm" onSubmit={handleSubmit}>
-        <input className="SearchForm-input"
+    <Form className="SearchForm" onSubmit={handleSubmit}>
+      <InputGroup>
+        <Input className="SearchForm-input"
           type="search"
           placeholder="Enter Search Term"
           onChange={handleChange}
           name="query"
           value={formData.query} />
-        <button className="SearchForm-button">Submit</button>
-      </form>
+        <Button className="SearchForm-button">Submit</Button>
+      </InputGroup>
+    </Form>
   )
 }
 

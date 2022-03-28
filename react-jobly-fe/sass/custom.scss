@@ -1,0 +1,27 @@
+$white: #fffdfe;
+
+$theme-colors: (
+    "light":      #d9f1f6,
+    "dark":       #0a1a2b,
+    "primary":    #003846,
+    "secondary":  #375f6f,
+    "info":       #47a4b6,
+    "accent1":    #7db34c,
+    "accent2":    #007e9f,
+    "accent3":    #9cb7b0,
+    "success":    #00ac57,
+    "warning":    #eacb00,
+    "danger":     #f8001e,
+);
+
+  @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+  $a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover';
+
+#{$a-tags} {
+  text-decoration: none;
+}
+#{$a-tags-hover} {
+  color: $white;
+}

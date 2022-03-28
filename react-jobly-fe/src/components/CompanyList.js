@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import JoblyApi from '../api';
 import { Link } from 'react-router-dom'
 import SearchForm from './SearchForm';
-import './CompanyList.css'
 const INITIAL_NO_FILTER = null;
 
 /** Company List handles logic of getting companies and creating a list of them

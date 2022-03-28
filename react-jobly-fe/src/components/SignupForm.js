@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import JoblyApi from '../api';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Row,
+  Col,
+  Card,
+  CardBody
+} from 'reactstrap';
 
 /** SignupForm
  *
@@ -48,50 +59,63 @@ function SignupForm({ updateToken }) {
   if (isRedirect) return <Redirect to="/" />
 
   return (
-    <form className='SignupForm' onSubmit={handleSubmit}>
-      <label htmlFor='username'>Username</label>
-      <input id='username'
-        name='username'
-        value={formData.username}
-        onChange={handleChange}
-        required />
-
-      <label htmlFor='password'>Password</label>
-      <input id='password'
-        type="password"
-        name='password'
-        value={formData.password}
-        onChange={handleChange}
-        required />
-
-      <label htmlFor='firstName'>First Name</label>
-      <input id='firstName'
-        name='firstName'
-        value={formData.firstName}
-        onChange={handleChange}
-        required />
-
-      <label htmlFor='lastName'>Last Name</label>
-      <input id='lastName'
-        name='lastName'
-        value={formData.lastName}
-        onChange={handleChange}
-        required />
-
-      <label htmlFor='email'>Email</label>
-      <input id='email'
-        type="email"
-        name='email'
-        value={formData.email}
-        onChange={handleChange}
-        required />
-
-      <button className="SignupForm-button">SignUp</button>
-      <br />
-      {errors && errors.map((e, i) => {
-        return <p className="SignupForm-errors" key={i}>{e}</p>
-      })}
-    </form>
+    <Row className="justify-content-center">
+      <Col xs={3}>
+        <Card>
+          <CardBody>
+            <Form className='SignupForm' onSubmit={handleSubmit}>
+              <FormGroup>
+                <Label htmlFor='username'>Username</Label>
+                <Input id='username'
+                  name='username'
+                  value={formData.username}
+                  onChange={handleChange}
+                  required />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor='password'>Password</Label>
+                <Input id='password'
+                  type="password"
+                  name='password'
+                  value={formData.password}
+                  onChange={handleChange}
+                  required />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor='firstName'>First Name</Label>
+                <Input id='firstName'
+                  name='firstName'
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor='lastName'>Last Name</Label>
+                <Input id='lastName'
+                  name='lastName'
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor='email'>Email</Label>
+                <Input id='email'
+                  type="email"
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
+                  required />
+              </FormGroup>
+              <Button className="SignupForm-button">SignUp</Button>
+              <br />
+              {errors && errors.map((e, i) => {
+                return <p className="SignupForm-errors" key={i}>{e}</p>
+              })}
+            </Form>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
   )
 }
 

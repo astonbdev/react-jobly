@@ -1,5 +1,6 @@
 import UserContext from './userContext';
 import { useContext } from 'react';
+import { Row, Col } from 'reactstrap';
 
 /**Homepage
  *
@@ -13,16 +14,24 @@ function Homepage() {
 
   if (currentUser) {
     return (
-      <div className="Homepage">
-        <h1 className="Homepage-title">Welcome to Jobly, {currentUser.firstName}</h1>
-      </div>
+      <Row className='justify-content-center'>
+        <Col xs={6}>
+          <div className="Homepage">
+            <h1 className="Homepage-title">Welcome to Jobly, {currentUser.firstName}</h1>
+          </div>
+        </Col>
+      </Row>
     );
   }
 
   return (
-    <div className="Homepage">
-      <h1 className="Homepage-title">Welcome to Jobly</h1>
-    </div>
+    <Row className='justify-content-center'>
+      <Col xs={6}>
+        <div className="Homepage">
+          <h1 className="Homepage-title center-block">Welcome to Jobly</h1>
+        </div>
+      </Col>
+    </Row>
   );
 }
 

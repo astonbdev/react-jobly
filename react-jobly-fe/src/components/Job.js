@@ -8,11 +8,11 @@
  */
 function Job({ job }) {
   return (
-    <div className="Job card mt-3 mb-3 bg-primary">
-      <div class="Job-title card-header">Job: {job.title}</div>
-      <div className="Job-body card-body">
-        <p className="Job-salary card-text">Salary: {job.salary}</p>
-        {job.equity && <p className="Job-equity card-text">Equity: {job.equity}</p>}
+    <div className="Job card mt-3 mb-3">
+      <div class="Job-title card-header bg-primary text-white">Job: {job.title}</div>
+      <div className="Job-body card-body bg-dark">
+        <p className="Job-salary text-white">Salary: {job.salary}</p>
+        {job.equity && <p className="Job-equity text-white">Equity: {job.equity}</p>}
       </div>
     </div>
   )
