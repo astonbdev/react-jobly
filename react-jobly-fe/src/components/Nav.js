@@ -14,15 +14,17 @@ function Nav({ logout }) {
   const currentUser = useContext(UserContext);
 
   return (
-    <nav className="Nav container-fluid">
-      <div className="Nav navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="Nav navbar navbar-expand-lg navbar-light bg-primary">
+      <div className="Nav container-fluid">
         <NavLink exact to="/" className="Nav navbar-brand">Jobly</NavLink>
-        <ul className="Nav navbar-nav">
+      </div>
+      <div className="Nav">
+        <ul className="Nav navbar-nav me-auto">
 
           {!currentUser &&
             <>
               <li className="Nav-link nav-item">
-                <NavLink className="Nav" to="/login">Login</NavLink>
+                <NavLink className="Nav nav-link" to="/login">Login</NavLink>
               </li>
               <li className="Nav-link nav-item">
                 <NavLink className="Nav nav-link" to="/signup">Signup</NavLink>
@@ -40,8 +42,8 @@ function Nav({ logout }) {
               <li className="Nav-link nav-item">
                 <NavLink className="Nav nav-link" to={`/profile/${currentUser.username}`}>Profile</NavLink>
               </li>
-              <li className="Nav-link nav-item nav-right">
-                <Link className="Nav nav-link" to="/" onClick={() => logout()}>Logout {currentUser.firstName}</Link>
+              <li className="Nav-link nav-item">
+                <Link className="Nav nav-link" to="/" onClick={() => logout()}>Logout</Link>
               </li>
             </>}
         </ul>
