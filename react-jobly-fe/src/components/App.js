@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import UserContext from "./userContext";
 import JoblyApi from '../api';
 import jwt_decode from "jwt-decode";
-import './App.css';
 
 /** Main App Component
  *
@@ -25,10 +24,10 @@ function App() {
 
   //check local storage token for the first time,
   //if there is update the token
-  useEffect(function checkLocalToken(){
+  useEffect(function checkLocalToken() {
     const localToken = localStorage.getItem("token");
-    if(localToken) updateToken(localToken);
-  },[])
+    if (localToken) updateToken(localToken);
+  }, [])
 
   function updateToken(token) {
     setToken(() => {
@@ -51,9 +50,9 @@ function App() {
    * returns success status msg in array
    */
   async function updateUser(updateData) {
-      const res = await JoblyApi.updateUser(updateData, currentUser.username);
-      setCurrentUser(res);
-      return ["Profile Updated!"];
+    const res = await JoblyApi.updateUser(updateData, currentUser.username);
+    setCurrentUser(res);
+    return ["Profile Updated!"];
   }
 
   useEffect(function getUser() {
@@ -74,7 +73,7 @@ function App() {
           <Nav logout={logout} />
           <Routes updateToken={updateToken}
             updateUser={updateUser}
-            user={currentUser}/>
+            user={currentUser} />
         </Router>
       </div>
     </UserContext.Provider>
