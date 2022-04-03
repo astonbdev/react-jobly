@@ -17,7 +17,7 @@ function Nav({ logout }) {
     <nav className="Nav navbar navbar-expand-lg navbar-light bg-white">
       <div className="Nav container-fluid">
         <NavLink exact to="/" className="Nav navbar-brand text-primary">
-          <img className="jobly-logo img-fluid" src="jobly-logo.png"></img>
+          <img className="jobly-logo" src="jobly-logo.png" alt="logo"></img>
         </NavLink>
       </div>
       <div className="Nav">

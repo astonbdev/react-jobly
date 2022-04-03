@@ -14,22 +14,21 @@ function Homepage() {
 
   if (currentUser) {
     return (
-      <Row className='justify-content-center'>
+      <Row className='justify-content-center d-flex vh-90'>
         <Col xs={6}>
-          <div className="Homepage">
-            <h1 className="Homepage-title">Welcome to Jobly, {currentUser.firstName}</h1>
-          </div>
+          <h1 className="Homepage-title text-primary display-1 m-5">Welcome to Jobly, {currentUser.firstName}</h1>
+          <img className="jobly-brand" src="jobly-brand.png" alt="brand"></img>
+
         </Col>
       </Row>
     );
   }
 
   return (
-    <Row className='justify-content-center'>
+    <Row className='justify-content-center d-flex vh-90'>
       <Col xs={6}>
-        <div className="Homepage">
-          <h1 className="Homepage-title center-block">Welcome to Jobly</h1>
-        </div>
+        <h1 className="Homepage-title text-primary display-1 m-5">Welcome to Jobly</h1>
+        <img className="jobly-brand" src="jobly-brand.png" alt="brand"></img>
       </Col>
     </Row>
   );

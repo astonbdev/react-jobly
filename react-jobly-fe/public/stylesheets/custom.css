@@ -11430,7 +11430,7 @@ a:active, a:hover {
 }
 
 .App {
-  height: 100vh;
+  height: 90vh;
   top: 0;
   width: 100vw;
   left: 0;
@@ -11449,6 +11449,10 @@ a:active, a:hover {
 
 .jobly-logo {
   height: 50px;
+}
+
+.jobly-brand {
+  height: 150px;
 }
 
 /*# sourceMappingURL=custom.css.map */

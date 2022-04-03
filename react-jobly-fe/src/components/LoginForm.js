@@ -64,9 +64,7 @@ function LoginForm({ updateToken }) {
             name='password'
             value={formData.password}
             onChange={handleChange} required />
-
-          <Button className="LoginForm-button">Login</Button>
-          <br />
+          <Button className="LoginForm-button mt-3">Login</Button>
           {errors && errors.map((e, i) => {
             return <p className="LoginForm-errors" key={i}>{e}</p>
           })}
