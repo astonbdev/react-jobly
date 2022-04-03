@@ -59,7 +59,7 @@ function SignupForm({ updateToken }) {
   if (isRedirect) return <Redirect to="/" />
 
   return (
-    <Row className="justify-content-center">
+    <Row className="justify-content-center text-primary">
       <Col xs={3}>
         <Card>
           <CardBody>

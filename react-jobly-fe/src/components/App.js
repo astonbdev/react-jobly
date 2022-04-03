@@ -68,14 +68,14 @@ function App() {
 
   return (
     <UserContext.Provider value={currentUser}>
-      <div className="App">
-        <Router>
-          <Nav logout={logout} />
+      <Router>
+        <Nav logout={logout} />
+        <div className="App">
           <Routes updateToken={updateToken}
             updateUser={updateUser}
             user={currentUser} />
-        </Router>
-      </div>
+        </div>
+      </Router>
     </UserContext.Provider>
 
   );

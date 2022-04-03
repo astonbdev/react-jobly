@@ -14,9 +14,11 @@ function Nav({ logout }) {
   const currentUser = useContext(UserContext);
 
   return (
-    <nav className="Nav navbar navbar-expand-lg navbar-light bg-primary">
+    <nav className="Nav navbar navbar-expand-lg navbar-light bg-white">
       <div className="Nav container-fluid">
-        <NavLink exact to="/" className="Nav navbar-brand text-white">Jobly</NavLink>
+        <NavLink exact to="/" className="Nav navbar-brand text-primary">
+          <img className="jobly-logo img-fluid" src="jobly-logo.png"></img>
+        </NavLink>
       </div>
       <div className="Nav">
         <ul className="Nav navbar-nav me-auto">
@@ -24,26 +26,26 @@ function Nav({ logout }) {
           {!currentUser &&
             <>
               <li className="Nav-link nav-item">
-                <NavLink className="Nav nav-link text-white" to="/login">Login</NavLink>
+                <NavLink className="Nav nav-link text-primary" to="/login">Login</NavLink>
               </li>
               <li className="Nav-link nav-item">
-                <NavLink className="Nav nav-link text-white" to="/signup">Signup</NavLink>
+                <NavLink className="Nav nav-link text-primary" to="/signup">Signup</NavLink>
               </li>
             </>}
 
           {currentUser &&
             <>
               <li className="Nav-link nav-item">
-                <NavLink className="Nav nav-link text-white" to="/companies">Companies</NavLink>
+                <NavLink className="Nav nav-link text-primary" to="/companies">Companies</NavLink>
               </li>
               <li className="Nav-link nav-item">
-                <NavLink className="Nav nav-link text-white" to="/jobs">Jobs</NavLink>
+                <NavLink className="Nav nav-link text-primary" to="/jobs">Jobs</NavLink>
               </li>
               <li className="Nav-link nav-item">
-                <NavLink className="Nav nav-link text-white" to={`/profile/${currentUser.username}`}>Profile</NavLink>
+                <NavLink className="Nav nav-link text-primary" to={`/profile/${currentUser.username}`}>Profile</NavLink>
               </li>
               <li className="Nav-link nav-item">
-                <Link className="Nav nav-link text-white" to="/" onClick={() => logout()}>Logout</Link>
+                <Link className="Nav nav-link text-primary" to="/" onClick={() => logout()}>Logout</Link>
               </li>
             </>}
         </ul>

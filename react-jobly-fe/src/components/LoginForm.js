@@ -49,7 +49,7 @@ function LoginForm({ updateToken }) {
   if (isRedirect) return <Redirect to="/" />;
 
   return (
-    <Row className="justify-content-center">
+    <Row className="justify-content-center text-primary">
       <Col xs={3}>
         <Form className='LoginForm' onSubmit={handleSubmit}>
           <Label htmlFor='username'>Username</Label>

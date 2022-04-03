@@ -1,14 +1,14 @@
 $white: #fffdfe;
 
 $theme-colors: (
-    "light":      #d9f1f6,
+    "light":      #d4effb,
     "dark":       #0a1a2b,
     "primary":    #003846,
     "secondary":  #375f6f,
     "info":       #47a4b6,
     "accent1":    #7db34c,
     "accent2":    #007e9f,
-    "accent3":    #9cb7b0,
+    "accent3":    #c6e9f9,
     "success":    #00ac57,
     "warning":    #eacb00,
     "danger":     #f8001e,
@@ -25,3 +25,27 @@ $a-tags-hover: 'a:active, a:hover';
 #{$a-tags-hover} {
   color: $white;
 }
+
+.App{
+  height: 100vh;
+  top: 0;
+  width: 100vw;
+  left: 0;
+  z-index: -1;
+  background-image: url("jobly-home.png");
+  background-size: cover;
+  background-position: center center;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+.Homepage{
+  text-shadow: 0 0 8px #66757f;
+}
+
+.jobly-logo{
+  height:50px;
+}
+
+
