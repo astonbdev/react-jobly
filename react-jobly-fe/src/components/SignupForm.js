@@ -60,7 +60,7 @@ function SignupForm({ updateToken }) {
 
   return (
     <Row className="justify-content-center text-primary">
-      <Col xs={3}>
+      <Col md={3}>
         <Card>
           <CardBody>
             <Form className='SignupForm' onSubmit={handleSubmit}>

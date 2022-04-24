@@ -57,7 +57,7 @@ function ProfileForm({ updateUser, user }) {
 
   return (
     <Row className="justify-content-center">
-      <Col xs={3}>
+      <Col md={3}>
         <Card className='text-primary'>
           <CardBody>
             <Form className='ProfileForm' onSubmit={handleSubmit}>

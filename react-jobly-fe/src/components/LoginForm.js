@@ -50,7 +50,7 @@ function LoginForm({ updateToken }) {
 
   return (
     <Row className="justify-content-center text-primary">
-      <Col xs={3}>
+      <Col md={3}>
         <Form className='LoginForm' onSubmit={handleSubmit}>
           <Label htmlFor='username'>Username</Label>
           <Input id='username'
