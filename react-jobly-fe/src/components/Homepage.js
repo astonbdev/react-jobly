@@ -17,7 +17,7 @@ function Homepage() {
       <Row className='justify-content-center d-flex vh-90'>
         <Col xs={6}>
           <h1 className="Homepage-title text-primary display-1 m-5">Welcome to Jobly, {currentUser.firstName}</h1>
-          <img className="jobly-brand" src="jobly-brand.png" alt="brand"></img>
+          <img id="jobly-logo" className="jobly-brand" src="jobly-brand.png" alt="brand"></img>
 
         </Col>
       </Row>
