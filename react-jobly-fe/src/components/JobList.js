@@ -6,7 +6,7 @@ import SearchForm from './SearchForm';
 /** JobList handles logic of getting jobs and creating a list of them
  *
  * props: none
- * state: jobs => {id, title, salary, equity}, 
+ * state: jobs => {id, title, salary, equity},
  *        filterData => {query}
  *        isFetching => bool
  * effect: getJobs() get data from API
@@ -25,7 +25,7 @@ function JobList() {
       setIsFetching(false);
     }
     fetchJobs();
-  }, [])
+  }, []);
 
   useEffect(function getJobsByFilter() {
     if (!filterData) {
@@ -39,7 +39,7 @@ function JobList() {
     }
 
     fetchJobs();
-  }, [filterData])
+  }, [filterData]);
 
   function handleSearch(query) {
     setFilterData(query);
