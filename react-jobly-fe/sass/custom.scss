@@ -1,23 +1,23 @@
 $white: #fffdfe;
 
 $theme-colors: (
-    "light":      #d4effb,
-    "dark":       #0a1a2b,
-    "primary":    #003846,
-    "secondary":  #375f6f,
-    "info":       #47a4b6,
-    "accent1":    #7db34c,
-    "accent2":    #007e9f,
-    "accent3":    #c6e9f9,
-    "success":    #00ac57,
-    "warning":    #eacb00,
-    "danger":     #f8001e,
+  "light": #d4effb,
+  "dark": #0a1a2b,
+  "primary": #003846,
+  "secondary": #375f6f,
+  "info": #47a4b6,
+  "accent1": #7db34c,
+  "accent2": #007e9f,
+  "accent3": #c6e9f9,
+  "success": #00ac57,
+  "warning": #eacb00,
+  "danger": #f8001e,
 );
 
-  @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
 
-  $a-tags: 'a, a:active, a:hover, a:visited';
-$a-tags-hover: 'a:active, a:hover';
+$a-tags: "a, a:active, a:hover, a:visited";
+$a-tags-hover: "a:active, a:hover";
 
 #{$a-tags} {
   text-decoration: none;
@@ -26,7 +26,7 @@ $a-tags-hover: 'a:active, a:hover';
   color: $white;
 }
 
-.App{
+.App {
   height: 90vh;
   top: 0;
   width: 100vw;
@@ -40,16 +40,16 @@ $a-tags-hover: 'a:active, a:hover';
   padding: 1rem;
 }
 
-.Homepage{
+.Homepage {
   text-shadow: 0 0 8px #66757f;
 }
 
-.jobly-logo{
-  height:50px;
+.jobly-logo {
+  height: 50px;
 }
 
-.jobly-brand{
-  height:150px;
+.jobly-brand {
+  height: 150px;
 }
 
 // .home-hero {
@@ -85,5 +85,3 @@ $a-tags-hover: 'a:active, a:hover';
 //   bottom: 0;
 //   background: rgba(255, 255, 255, 0.3);
 // }
-
-
