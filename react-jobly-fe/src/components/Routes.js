@@ -1,4 +1,5 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 import Homepage from './Homepage';
 import CompanyList from './CompanyList';
 import JobList from './JobList';
@@ -30,22 +31,18 @@ function Routes({ updateToken, updateUser, user }) {
         <Route exact path="/">
           <Homepage />
         </Route>
-        {user &&
-          <>
-            <Route exact path="/companies">
-              <CompanyList />
-            </Route>
-            <Route exact path="/companies/:handle">
-              <CompanyDetails />
-            </Route>
-            <Route exact path="/jobs">
-              <JobList />
-            </Route>
-            <Route exact path="/profile/:username">
-              <ProfileForm updateUser={updateUser} user={user} />
-            </Route>
-          </>
-        }
+        <PrivateRoute exact path="/companies" user={user}>
+          <CompanyList />
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies/:handle" user={user}>
+          <CompanyDetails />
+        </PrivateRoute>
+        <PrivateRoute exact path="/jobs" user={user}>
+          <JobList />
+        </PrivateRoute>
+        <PrivateRoute exact path="/profile/:username" user={user}>
+          <ProfileForm updateUser={updateUser} user={user} />
+        </PrivateRoute>
         {!user &&
           <>
             <Route exact path="/signup">
