@@ -65,7 +65,7 @@ class JoblyApi {
   static async getCompaniesByName(filters) {
     let endpoint = 'companies?';
     if (filters.query.length) {
-      endpoint += `name=${filters.query}`
+      endpoint += `name=${encodeURIComponent(filters.query)}`
     }
 
     const res = await this.request(endpoint);
@@ -102,7 +102,7 @@ class JoblyApi {
   static async getJobsByTitle(filters) {
     let endpoint = `jobs?`
     if (filters.query.length) {
-      endpoint += `title=${filters.query}`
+      endpoint += `title=${encodeURIComponent(filters.query)}`
     }
 
     const res = await this.request(endpoint);
