@@ -18,7 +18,9 @@ class JoblyApi {
   static token = "";
 
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", endpoint, data, method);
+    // Create a safe version of data for logging that excludes passwords
+    const safeData = this.getSafeDataForLogging(data);
+    console.debug("API Call:", endpoint, safeData, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     console.log(url);
@@ -34,6 +36,21 @@ class JoblyApi {
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
+  }
+
+  // Helper method to create a safe version of data for logging
+  static getSafeDataForLogging(data) {
+    if (!data || typeof data !== 'object') return data;
+    
+    // Create a copy of the data to avoid modifying the original
+    const safeData = { ...data };
+    
+    // Remove sensitive fields
+    if ('password' in safeData) {
+      safeData.password = '[REDACTED]';
+    }
+    
+    return safeData;
   }
 
   // Individual API routes
@@ -142,11 +159,26 @@ class JoblyApi {
    * user => {username, password, firstName, lastName, email}
    *
    * returns token from response
+   * 
+   * Security note: Password is only transmitted via HTTPS and never stored locally
    */
   static async registerUser(user) {
     const method = 'post';
-    const res = await this.request(`auth/register`, user, method);
-    return res.token;
+    
+    try {
+      const res = await this.request(`auth/register`, user, method);
+      // Clear sensitive data after use
+      if (user && typeof user === 'object') {
+        user.password = null;
+      }
+      return res.token;
+    } catch (error) {
+      // Clear sensitive data even on error
+      if (user && typeof user === 'object') {
+        user.password = null;
+      }
+      throw error;
+    }
   }
 
   /**
@@ -155,11 +187,26 @@ class JoblyApi {
    * user => {username, password}
    *
    * returns token from response
+   * 
+   * Security note: Password is only transmitted via HTTPS and never stored locally
    */
   static async loginUser(user) {
     const method = 'post';
-    const res = await this.request(`auth/token`, user, method);
-    return res.token;
+    
+    try {
+      const res = await this.request(`auth/token`, user, method);
+      // Clear sensitive data after use
+      if (user && typeof user === 'object') {
+        user.password = null;
+      }
+      return res.token;
+    } catch (error) {
+      // Clear sensitive data even on error
+      if (user && typeof user === 'object') {
+        user.password = null;
+      }
+      throw error;
+    }
   }
 }
 

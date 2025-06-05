@@ -35,7 +35,13 @@ function SignupForm({ updateToken }) {
   const [isRedirect, setIsRedirect] = useState(false);
   const [errors, setErrors] = useState(null);
 
-  console.log('SIGNUP FORM', formData, isRedirect, errors);
+  // Avoid logging sensitive data like passwords
+  console.log('SIGNUP FORM', { 
+    username: formData.username, 
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    email: formData.email
+  }, isRedirect, errors);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -48,11 +54,26 @@ function SignupForm({ updateToken }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      const token = await JoblyApi.registerUser(formData);
+      // Create a copy of the form data to avoid modifying the original state directly
+      const signupData = { ...formData };
+      
+      // Call the API with the user data
+      const token = await JoblyApi.registerUser(signupData);
+      
+      // Update token and redirect on success
       updateToken(token);
+      
+      // Clear sensitive data from state (especially password)
+      setFormData(initialState);
       setIsRedirect(true);
     } catch (err) {
       setErrors(() => err);
+      
+      // Clear the password field on error for security
+      setFormData(data => ({
+        ...data,
+        password: ""
+      }));
     }
   }
 
